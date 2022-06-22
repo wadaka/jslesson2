@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <button  class="select">赤を持つ</button>
+   <button  class="select">緑を持つ</button>
+   <button  class="select">青を持つ</button>
+   <button  onclick="Write()">書く</button>
+   <p id="info"></p>
+   <script>
+    class Pen{
+        constructor(color,length){
+            this.color=color;
+            this.length=length;
+        }
+        write(){
+            let msg='';
+            if(this.length<=0){
+                msg= 'もう書けません';
+            }else{
+                this.length-=0.5;
+                msg=`${this.color}で書いた。残りの長さ${this.length}`;
+            }
+            return msg;
+        }
+    }
+    //const bts=document.querySelectorAll('.select');
+    //querySelectorAll：見つけたものを、すべて配列化して返す
+    const bts=document.querySelectorAll('.select');
+    let pens=[new Pen('赤',10),new Pen('緑',10),new Pen('青',10)];
+    let pen = null;
+    const info=document.getElementById('info');
+    for(let i=0;i<bts.length;i++){
+        bts[i].addEventListener('click',()=>{
+            pen=pens[i];
+            info.textContent=pen.color+'を持った。';
+        });
+    }
+    const Write=()=>{
+        let meg='';
+        if(pen==null){
+            msg='ペンを持ってください!';
+        }else{
+            msg=pen.write();
+        }
+        info.textContent = msg;
+    };
+   </script>
+</body>
+</html>
